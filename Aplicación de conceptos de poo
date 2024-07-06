@@ -1,0 +1,73 @@
+# Definición de la clase base
+class Animal:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def hacer_sonido(self):
+        return "Sonido genérico"
+
+    def __str__(self):
+        return f"{self.nombre}, {self.edad} años"
+
+# Clase derivada que hereda de Animal
+class Perro(Animal):
+    def __init__(self, nombre, edad, raza):
+        super().__init__(nombre, edad)
+        self.raza = raza
+
+    def hacer_sonido(self):
+        return "Guau!"
+
+    def __str__(self):
+        return f"Perro: {self.nombre}, {self.edad} años, raza {self.raza}"
+
+# Clase derivada que hereda de Animal
+class Gato(Animal):
+    def __init__(self, nombre, edad, color):
+        super().__init__(nombre, edad)
+        self.color = color
+
+    def hacer_sonido(self):
+        return "Miau!"
+
+    def __str__(self):
+        return f"Gato: {self.nombre}, {self.edad} años, color {self.color}"
+
+# Implementación de encapsulación
+class CuentaBancaria:
+    def __init__(self, numero_cuenta, saldo):
+        self.__numero_cuenta = numero_cuenta  # Atributo privado
+        self.__saldo = saldo  # Atributo privado
+
+    def depositar(self, cantidad):
+        if cantidad > 0:
+            self.__saldo += cantidad
+
+    def retirar(self, cantidad):
+        if cantidad > 0 and cantidad <= self.__saldo:
+            self.__saldo -= cantidad
+
+    def obtener_saldo(self):
+        return self.__saldo
+
+# Demostración de polimorfismo
+def imprimir_sonido(animal):
+    print(animal.hacer_sonido())
+
+# Crear instancias de las clases
+perro = Perro("Max", 5, "Labrador")
+gato = Gato("Luna", 3, "Negro")
+
+# Uso de métodos para demostrar funcionalidad
+print(perro)
+print(gato)
+imprimir_sonido(perro)
+imprimir_sonido(gato)
+
+# Uso de encapsulación
+cuenta = CuentaBancaria("123456", 1000)
+cuenta.depositar(500)
+print(f"Saldo después de depositar: {cuenta.obtener_saldo()}")
+cuenta.retirar(300)
+print(f"Saldo después de retirar: {cuenta.obtener_saldo()}")
